@@ -8,6 +8,11 @@ export class AuthguardService implements CanActivate {
     constructor( public router: Router) { }
 
     canActivate(): boolean {
-      return sessionStorage.getItem('username') !== 'test@gmail.com';
+      if(sessionStorage.getItem('username')) {
+        return true;
+      } else {
+        this.router.navigate(['']);
+        return false;
+      }
     }
 }

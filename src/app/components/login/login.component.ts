@@ -58,5 +58,4 @@ export class LoginComponent implements OnInit, AfterContentInit {
       this.isMailer = false;
     }
   }
-
 }

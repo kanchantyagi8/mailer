@@ -1,4 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 export class HeaderComponent implements OnInit, DoCheck {
   unreadMails: number = 0;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -17,4 +18,12 @@ export class HeaderComponent implements OnInit, DoCheck {
     this.unreadMails = parseInt(localStorage.getItem('unreadmails'));
   }
 
+  logout() {
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('name');
+    localStorage.setItem('count', JSON.stringify(0));
+    localStorage.setItem('sendMails', JSON.stringify([]));
+    localStorage.setItem('unreadmails', JSON.stringify(0));
+    this.router.navigate(['']);
+  }
 }
