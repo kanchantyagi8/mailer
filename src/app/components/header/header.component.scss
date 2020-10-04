@@ -1,0 +1,36 @@
+@import '../../../global-style/palette.scss';
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    .logout {
+        cursor: pointer;
+    }
+
+    .mailer, .logout {
+        color: $color-grey-font;
+        position: relative;
+        margin-left: 40px;
+        font-size: 14px;
+
+        span {
+            margin-left: 4px;
+        }
+
+        span.notification {
+            background-color: $color-orange;
+            width: 14px;
+            height: 10px;
+            position: absolute;
+            border-radius: 3px;
+            padding: 2px 3px 4px;
+            top: -7px;
+            left: 7px;
+            font-size: 11px;
+            text-align: center;
+            color: $color-white;
+        }
+    }
+}

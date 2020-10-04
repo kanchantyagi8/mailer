@@ -1,0 +1,29 @@
+@import '../../../global-style/palette.scss';
+.user-detail {
+    span {
+        font-size: 22px;
+        color: $color-white;
+    }
+    
+    .icon:before {
+        content: "\002B";
+        font-size: 20px;
+        color: $color-white;
+    }
+    .user-text {
+        text-align: center;
+    }
+    figure {
+        margin: 0 25px;
+        img {
+            background-color: #ccc;
+            border-radius: 100%;
+            width: 35%;
+            margin-bottom: 7px;
+        }
+        figcaption {
+            color: $color-white;
+            font-size: 14px;
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<div class="left-conatiner">
+    <input type="button" (click)="openComposeMail()" class="compose-button" value="Compose Mail">
+    <div class="compose-container">
+        <app-compose-mail (closeComposeMail)="closeCompose()" [showComposeMail]="showComposeMail"></app-compose-mail>
+    </div>
+
+    <div class="folder-container">
+        <ul class="folder-ul">
+            <li *ngFor="let folder of folderItems" class="{{folder.id}}">
+                <span>{{folder.value}}</span>
+                <ul>
+                    <li *ngFor="let items of folder.items" class="{{items.id}}">
+                        <i class={{items.classList}}></i>
+                        <a (click)="navigate(items.id)">{{items.value}}</a>
+                        <span class="notification" *ngIf="items.id === 'inbox'">
+                            {{unreadMails}}
+                        </span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

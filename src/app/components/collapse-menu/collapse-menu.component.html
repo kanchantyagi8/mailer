@@ -1,0 +1,11 @@
+<div class="collapse-menu-bar">
+    <div (click)="userExpended()" class="user-info" [ngClass]="expend ?'user-expend':''">
+        <app-user-detail [showIcon]="!expend"></app-user-detail>
+    </div>
+    <ul>
+        <li *ngFor="let menuItem of menuItemList" id="{{menuItem.id}}" (click)="selectedMenu(menuItem.id)" [ngClass]="{active: isActive(menuItem.id)}">
+            <span class="icon"></span>
+            <a class="expended-content" *ngIf="expend">{{menuItem.value}}</a>
+        </li>
+    </ul>
+</div>

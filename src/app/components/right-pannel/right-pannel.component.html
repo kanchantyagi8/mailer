@@ -1,0 +1,9 @@
+<div class="right-pannel">
+    <div class="header-container">
+        <app-header></app-header>
+    </div>
+    <div class="body-container">
+        <app-left-pannel (navigateToPage)="changeComponent()"></app-left-pannel>
+        <app-body-section [getNavigator]="navigationLink"></app-body-section>
+    </div>
+</div>

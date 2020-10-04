@@ -1,0 +1,107 @@
+@import '../../../global-style/palette.scss';
+
+.body-section {
+    width: 95%;
+    background-color: $color-white;
+    height: 545px;
+    min-height: 545px;
+    margin-top: 20px;
+    border: 1px solid $color-input-border;
+    margin-top: 20px;
+    border-radius: 2px;
+
+    h2 {
+        font-size: 24px;
+        font-weight: 300;
+        margin-top: 0;
+    }
+
+    .body-inner-section {
+        overflow: auto;
+        height: 81%;
+    }
+
+    .right-header {
+        padding: 25px 15px 15px;
+        border-bottom: 1px solid $color-input-border;
+        .inbox-menu-items {
+            display: flex;
+            flex-direction: row;
+            .refresh, .delete {
+                border: 1px solid $color-input-border;
+                padding: 5px 10px;
+                border-radius: 3px;
+                font-size: 12px;
+                color: $color-menu-bg;
+                margin-right: 5px;
+                cursor: pointer;
+                span {
+                    margin-left: 5px;
+                }
+            }
+            .refresh:hover, .delete:hover {
+                background-color: $color-grey-bg;
+            }
+        }
+    }
+
+    .body-ul {
+        padding: 0;
+        margin: 0;
+        li {
+            list-style: none;
+            padding: 15px 15px 10px;
+            border-bottom: 1px solid $color-input-border;
+            cursor: pointer;
+
+            .mail-showcase {
+                display: -webkit-inline-box;
+                width: 100%;
+                font-size: 14px;
+                color: $color-menu-bg;
+
+                .checkbox-container {
+                    width: 5%;
+                    input[type='checkbox'] {
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 0px;
+                        margin: 0;
+                        cursor: pointer;
+                    }
+                }
+                .mail-info {
+                    display: contents;
+                    width: 94%;
+                    float: right;
+                }
+                .name-container {
+                    width: 30%;
+                }
+                .subject-container {
+                    width: 45%;
+                }
+                .date-container {
+                    width: 20%;
+                    text-align: right;
+                }
+            }
+        }
+
+        li:hover, .li-selected {
+            background-color: $color-grey-bg;
+        }
+    }
+    .other-container {
+        position: relative;
+        width: 100%;
+        height: inherit;
+        h2 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            width: fit-content;
+        }
+    }
+}

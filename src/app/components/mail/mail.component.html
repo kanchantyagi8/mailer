@@ -1,0 +1,12 @@
+<div class="read-mail-section">
+    <div class="back-icon" (click)="back()">
+        <i class="fas fa-step-backward"></i>
+    </div>
+    <h3>Subject: {{mailDetail.subject}}</h3>
+    <p>From: {{mailDetail.from}}</p>
+    <p>Date: {{mailDetail.sendDate}}</p>
+    <p>Time: {{mailDetail.sendTime}}</p>
+    <p class="message">
+        {{mailDetail.message}}
+    </p>
+</div>

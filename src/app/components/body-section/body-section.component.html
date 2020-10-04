@@ -1,0 +1,48 @@
+<div class="body-section">
+    <div *ngIf="getNavigator === 'inbox'">
+        <div class="right-header">
+            <h2>Inbox({{totalUnreadMails}})</h2>
+            <div class="inbox-menu-items">
+                <div class="refresh" (click)="refreshPage()">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Refresh</span>
+                </div>
+                <div class="delete" (click)="deleteItem()">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!showInnerMail" class="body-inner-section">
+            <ul class="body-ul">
+                <li *ngFor="let mail of mailList; let i = index" id="id_{{i}}" [ngClass]="mail.readMail === true ? 'li-selected': ''">
+                    <div class="mail-showcase">
+                        <div class="checkbox-container">
+                            <input type="checkbox" (change)="checkboxSelected(mail, i)"/>
+                        </div>
+                        <div class="mail-info" (click)="openMail(mail, i)">
+                            <div class="name-container">
+                                {{mail.from}}
+                            </div>
+                            <div class="subject-container">
+                                {{mail.subject}}
+                            </div>
+                            <div class="date-container">
+                                {{mail.sendDate}}, {{mail.sendTime}}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div *ngIf="getNavigator === 'send'">
+        <app-send-mail></app-send-mail>
+    </div>
+    <div class="other-container" *ngIf="getNavigator !== 'send' && getNavigator !== 'inbox'">
+        <h2>No data in {{getNavigator.toUpperCase()}}</h2>
+    </div>
+    <div *ngIf="showInnerMail" class="mail-inner-section">
+        <app-mail (returnToMail)="returnMail()" [mailDetail]="mailDetail">
+        </app-mail>
+    </div>
+</div>

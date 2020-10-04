@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="login-container">
+        <h1>{{user}} Login</h1>
+        <form id="entity-form" [formGroup]="loginForm" class="login-form" (ngSubmit)="loginApp()">
+            <div class="input-container">
+                <input type="text" formControlName="name" name="name" placeholder="Name"/>
+                <div>
+                    <ng-container *ngTemplateOutlet="input; context: { formControl: loginForm.controls['name'], formValue: 'Name'}"></ng-container>
+                </div>
+            </div>
+            <div class="input-container">
+                <input type="text" formControlName="username" name="username" placeholder="Username"/>
+                <div>
+                    <ng-container *ngTemplateOutlet="input; context: { formControl: loginForm.controls['username'], formValue: 'Username'}"></ng-container>
+                </div>
+            </div>
+            <div class="input-container">
+                <input type="password" formControlName="password" name="password" placeholder="Password" id="password"/>
+                <i class="far fa-eye" id="togglePassword"></i>
+                <div>
+                    <ng-container *ngTemplateOutlet="input; context: { formControl: loginForm.controls['password'], formValue: 'Password'}"></ng-container>
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="submit" [disabled]="!loginForm.valid">Login</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <ng-template #input let-formControl="formControl" let-formValue="formValue">
+        <div class="formErrorMsg"
+            *ngIf="formControl && formControl.errors && (formControl.dirty || formControl.touched)">
+            <div *ngIf="formControl.errors.required">*Please enter {{ formValue }} here</div>
+            <div *ngIf="formControl.errors.pattern">*Entered value for {{ formValue }} is invalid</div>
+        </div>
+    </ng-template>
+</div>

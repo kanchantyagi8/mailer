@@ -1,0 +1,58 @@
+@import '../../../global-style/palette.scss';
+
+.login-container {
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    .input-container {
+        margin-bottom: 20px;
+        position: relative;
+
+        input {
+            height: 30px;
+            width: 100%;
+            margin-bottom: 6px;
+        }
+
+        i#togglePassword {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            cursor: pointer;
+        }
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    
+        button {
+            background-color: $color-blue;
+            border: 1px solid $color-blue;
+            color: $color-white;
+            padding: 10px 40px;
+            margin-right: 20px;
+            border-radius: 3px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:nth-child(2) {
+            margin-right: 0;
+        }
+    }
+}

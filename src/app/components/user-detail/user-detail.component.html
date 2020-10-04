@@ -1,0 +1,12 @@
+<div class="user-detail">
+    <div *ngIf="showIcon" class="user-text">
+        <span>{{language}}<span class="icon"></span></span>
+    </div>
+    <div *ngIf="!showIcon">
+        <figure>
+            <img src="../../../assets/images/user-icon-png.png" alt="user image"/>
+            <figcaption>{{name}}</figcaption>
+            <figcaption>Developer</figcaption>
+        </figure>
+    </div>
+</div>

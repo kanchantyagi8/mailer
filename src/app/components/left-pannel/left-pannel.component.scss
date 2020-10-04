@@ -1,0 +1,114 @@
+@import '../../../global-style/palette.scss';
+
+.left-conatiner {
+    width: 250px;
+    margin: 20px 35px 0;
+
+    a {
+        font-size: 14px;
+    }
+    .compose-button {
+        width: 100%;
+        background-color: $color-blue;
+        padding: 9px;
+        border-radius: 3px;
+        border: 1px solid $color-blue;
+        color: $color-white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .folder-container {
+        ul.folder-ul {
+            margin: 10px 5px 0;
+        }
+        ul {
+            padding: 0;
+            li {
+                list-style: none;
+                color: $color-menu-bg;
+
+                a {
+                    margin-left: 10px;
+                }
+            }
+        }
+        ul.folder-ul > li {
+            margin-bottom: 13px;
+        }
+
+        ul.folder-ul > li:last-child {
+            margin-bottom: 0;
+        }
+
+        ul.folder-ul > li > span {
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: $color-menu-bg;
+            font-size: 14px;
+            margin-bottom: 8px;
+            float: left;
+            width: 100%;
+        }
+
+        ul.folder-ul > li > ul > li {
+            border-bottom: 1px solid $color-input-border;
+            padding: 5px;
+            font-size: 14px;
+
+            a {
+                cursor: pointer;
+                color: $color-menu-bg;
+                text-decoration: none;
+            }
+
+            a:hover {
+                font-weight: bold;
+            }
+
+            .notification {
+                background-color: $color-orange;
+                float: right;
+                color: $color-white;
+                border-radius: 3px;
+                padding: 0 10px;
+                width: auto;
+                height: 15px;
+                font-size: 13px;
+            }
+        }
+
+        ul.folder-ul > li > ul > li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        li.label {
+            ul {
+                li {
+                    display: inline-block;
+                    background-color: $color-white;
+                    margin: 0 5px 5px 0;
+                    border: 1px solid $color-input-border;
+                    border-radius: 3px;
+                    padding: 4px 10px !important;
+
+                    a {
+                        font-size: 12px !important;
+                    }
+
+                    a:hover {
+                        font-weight: normal !important;
+                    }
+
+                    i.fas {
+                        font-size: 11px;
+                    }
+                }
+                li:hover {
+                    background-color: $color-grey-bg;
+                }
+            }
+        }
+    }
+}

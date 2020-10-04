@@ -1,0 +1,30 @@
+<div class="composemail-section" *ngIf="showComposeMail">
+    <div class="cancel-header">
+        <span (click)="closeCompose()">X</span>
+    </div>
+    <div class="send-mail-form">
+        <form [formGroup]="mailingForm" (ngSubmit)="sendMail()">
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="email" formControlName="toEmailId" name="toEmail" placeholder="To"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" formControlName="ccEmailId" name="toCCemail" placeholder="CC"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" formControlName="subject" name="subject" placeholder="Subject"/>
+                </div>
+
+                <div class="form-group">
+                    <textarea formControlName="message" name="message" placeholder="Message" rows="15"></textarea>
+                </div>
+            </div>
+            <div class="form-footer">
+                <button type="submit" id="send-button">Send</button>
+                <button type="cancel" (click)="closeCompose()" id="cancel-button">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

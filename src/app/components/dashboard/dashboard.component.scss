@@ -1,0 +1,9 @@
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+
+    app-right-pannel {
+        width: -webkit-fill-available;
+    }
+}

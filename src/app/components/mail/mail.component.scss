@@ -1,0 +1,33 @@
+@import '../../../global-style/palette.scss';
+
+.read-mail-section {
+    padding: 0 15px;
+    .back-icon {
+        border: 1px solid $color-input-border;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 12px;
+        color: $color-menu-bg;
+        margin-right: 5px;
+        cursor: pointer;
+        width: 10px;
+        position: absolute;
+        margin-top: -62px;
+        margin-left: 123px;
+    }
+    .back-icon:hover {
+        background-color: $color-grey-bg;
+    }
+    h3 {
+        font-size: 20px;
+        font-weight: 300;
+    }
+    p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: $color-selected-item;    
+    }
+    .message {
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,18 @@
+@import '../../../global-style/palette.scss';
+
+.right-pannel {
+    .header-container {
+        background-color: $color-white;
+        height: 64px;
+        padding: 25px 22px 15px;
+        box-sizing: border-box;
+        border-bottom: 1px solid $color-input-border;
+    }
+    .body-container {
+        display: flex;
+        flex-direction: row;
+    }
+    app-body-section {
+        width: -webkit-fill-available;
+    }
+}
