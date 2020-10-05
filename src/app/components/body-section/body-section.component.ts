@@ -54,7 +54,7 @@ export class BodySectionComponent implements OnInit {
         for(var j = 0; j <= this.deleteItemList.length - 1; j++) {
           if(this.deleteItemList[j] === this.mailList[i].id) {
             if(this.mailList[i].readMail !== true) {
-              this.totalUnreadMails--;
+              this.totalUnreadMails = this.totalUnreadMails !== 0 ? this.totalUnreadMails-- : 0 ;
               localStorage.setItem('unreadmails', this.totalUnreadMails);
             }
             this.mailList.splice(i,1);
