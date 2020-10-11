@@ -1,6 +1,8 @@
-<div class="composemail-section" *ngIf="showComposeMail">
+<div id="compose" class="composemail-section" *ngIf="showComposeMail">
     <div class="cancel-header">
-        <span (click)="closeCompose()">X</span>
+        <span (click)="hideCompose()"><i class="fas fa-minus"></i></span>
+        <span (click)="expendCompose()"><i class="fas fa-expand-alt"></i></span>
+        <span (click)="closeCompose()"><i class="fas fa-times"></i></span>
     </div>
     <div class="send-mail-form">
         <form [formGroup]="mailingForm" (ngSubmit)="sendMail()">
@@ -22,8 +24,9 @@
                 </div>
             </div>
             <div class="form-footer">
-                <button type="submit" id="send-button">Send</button>
-                <button type="cancel" (click)="closeCompose()" id="cancel-button">Cancel</button>
+                <button type="submit">Send</button>
+                <button (click)="draftMail()">Save as Draft</button>
+                <button type="cancel" (click)="closeCompose()">Cancel</button>
             </div>
         </form>
     </div>

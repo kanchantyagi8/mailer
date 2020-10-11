@@ -1,5 +1,5 @@
 <div class="body-section">
-    <div *ngIf="getNavigator === 'inbox'">
+    <div id="body-outer" class="body-outer-section" *ngIf="getNavigator === 'inbox'">
         <div class="right-header">
             <h2>Inbox({{totalUnreadMails}})</h2>
             <div class="inbox-menu-items">
@@ -10,18 +10,21 @@
                 <div class="delete" (click)="deleteItem()">
                     <i class="fas fa-trash-alt"></i>
                 </div>
+                <div class="search-container">
+                    <app-search-container (searchItem)="searchText($event)"></app-search-container>
+                </div>
             </div>
         </div>
         <div *ngIf="!showInnerMail" class="body-inner-section">
             <ul class="body-ul">
-                <li *ngFor="let mail of mailList; let i = index" id="id_{{i}}" [ngClass]="mail.readMail === true ? 'li-selected': ''">
+                <li *ngFor="let mail of inputList | search: searchItem; let i = index" id="id_{{i}}" [ngClass]="mail.readMail === true ? 'li-selected': ''">
                     <div class="mail-showcase">
                         <div class="checkbox-container">
-                            <input type="checkbox" (change)="checkboxSelected(mail, i)"/>
+                            <input type="checkbox" (change)="checkboxSelected($event, mail, i)"/>
                         </div>
-                        <div class="mail-info" (click)="openMail(mail, i)">
+                        <div class="mail-info" (click)="openMail(mail)">
                             <div class="name-container">
-                                {{mail.from}}
+                                {{mail.fromName}}
                             </div>
                             <div class="subject-container">
                                 {{mail.subject}}
@@ -35,10 +38,17 @@
             </ul>
         </div>
     </div>
+
     <div *ngIf="getNavigator === 'send'">
         <app-send-mail></app-send-mail>
     </div>
-    <div class="other-container" *ngIf="getNavigator !== 'send' && getNavigator !== 'inbox'">
+    <div *ngIf="getNavigator === 'trash'">
+        <app-trash-mail></app-trash-mail>
+    </div>
+    <div *ngIf="getNavigator === 'draft'">
+        <app-draft-mail></app-draft-mail>
+    </div>
+    <div class="other-container" *ngIf="getNavigator !== 'send' && getNavigator !== 'inbox' && getNavigator !== 'trash' && getNavigator !== 'draft'">
         <h2>No data in {{getNavigator.toUpperCase()}}</h2>
     </div>
     <div *ngIf="showInnerMail" class="mail-inner-section">

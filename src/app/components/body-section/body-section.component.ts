@@ -9,93 +9,99 @@ import { GlobalService } from '../../services/global.service';
 export class BodySectionComponent implements OnInit {
   @Input() getNavigator: string;
 
-  mailList: any = [];
+  inputList: any = [];
   deleteItemList: any = [];
   showInnerMail: boolean = false;
   mailDetail: any;
   count: number = 0;
   totalUnreadMails: any = 0;
+  localArr: any;
+  searchItem: string = '';
 
   constructor(private globalService: GlobalService) { }
 
+  searchText(e) {
+    this.searchItem = e;
+  }
+
   ngOnInit(): void {
     this.getNavigator = 'inbox';
-    let x = JSON.parse(localStorage.getItem('emailContainer'));
-    if(this.mailList.length !== x.length) {
-      for(let i = 0; i <= x.length - 1; i++) {
-        let element = x[i];
-        if(element.toEmail === sessionStorage.getItem('username') || 
-          element.ccEmail === sessionStorage.getItem('username')) {
-          this.mailList.push(element);
-        }
+    this.searchItem = "";
+    this.localArr = JSON.parse(localStorage.getItem('emailContainer'));
+    this.inputList = [];
+    let unread = 0;
+    for(let i = 0; i <= this.localArr.length - 1; i++) {
+      let element = this.localArr[i];
+      if(element.emailId === sessionStorage.getItem('username')) {
+        this.inputList = element.inputMails;
+        this.globalService.setIndex(i);
+        this.globalService.setData(element);
+        element.inputMails.forEach((item) => {
+          if(!item.readMail) {
+            unread++;
+          }
+        });
       }
-      this.totalUnreadMails = parseInt(localStorage.getItem('unreadmails'));
+      this.globalService.setUnreadMails(unread);
+      this.totalUnreadMails = unread;
     }
   }
 
   refreshPage() {
-    window.location.reload();
+    this.ngOnInit();
   }
 
-  checkboxSelected(item, i) {
+  checkboxSelected(event, item, i) {
     let ele = document.getElementById(`id_${i}`);
-    if(ele.classList.contains('li-selected') && !item.readMail) {
-      ele.classList.remove('li-selected');
-    } else {
+    if(event.target.checked) {
       ele.classList.add('li-selected');
+      this.deleteItemList.unshift(item.id);
+    } else {
+      this.deleteItemList.splice(this.deleteItemList.indexOf(item.id), 1);
+      if(!item.readMail) {
+        ele.classList.remove('li-selected');
+      }
     }
-    this.deleteItemList.push(item.id);
   }
 
   deleteItem() {
     if(this.deleteItemList.length > 0) {
       this.deleteItemList.sort();
-      for(var i = 0; i <= this.mailList.length - 1; i++) {
+      let item = this.globalService.getData();
+      for(var i = 0; i <= this.inputList.length - 1; i++) {
         for(var j = 0; j <= this.deleteItemList.length - 1; j++) {
-          if(this.deleteItemList[j] === this.mailList[i].id) {
-            if(this.mailList[i].readMail !== true) {
-              this.totalUnreadMails = this.totalUnreadMails !== 0 ? this.totalUnreadMails-- : 0 ;
-              localStorage.setItem('unreadmails', this.totalUnreadMails);
-            }
-            this.mailList.splice(i,1);
-            let id = this.deleteItemList[j];
-            let localArr = JSON.parse(localStorage.getItem('emailContainer'));
-            for(var k = 0; k <= localArr.length - 1; k++) {
-              if(localArr[k].id === id) {
-                localArr.splice(k,1);
-                localStorage.setItem('emailContainer', JSON.stringify(localArr));
-              }
-            }
+          if(this.deleteItemList[j] === this.inputList[i].id) {
+            item.deleteMails.unshift(this.inputList[i]);
+            this.inputList.splice(i,1);
           }
         }
       }
+      this.localArr[this.globalService.getIndex()] = item;
+      localStorage.setItem('emailContainer', JSON.stringify(this.localArr));
+      this.deleteItemList = [];
     } else {
       alert("Please select an email for delete");
     }
   }
 
-  openMail(item, i) {
+  openMail(item) {
     this.showInnerMail = true;
+    document.getElementById('body-outer').style.height = 'auto';
     this.mailDetail = item;
-    let mailArr = JSON.parse(localStorage.getItem('emailContainer'));
-    let unread = parseInt(localStorage.getItem('unreadmails'));
-    for(let element of mailArr) {
+    let x = JSON.parse(localStorage.getItem('emailContainer'));
+    let mailArr = this.globalService.getData();
+    for(var element of mailArr.inputMails) {
       if(element.id === item.id && element.readMail === false) {
         element.readMail = true;
-        unread !== 0 ? unread-- : 0;
       }
     }
-    localStorage.setItem('emailContainer', JSON.stringify(mailArr));
-    localStorage.setItem('selectedMailId', i);
-    localStorage.setItem('unreadmails', JSON.stringify(unread));
-    this.totalUnreadMails = unread;
+    x[this.globalService.getIndex()].inputMails = mailArr.inputMails;
+    localStorage.setItem('emailContainer', JSON.stringify(x));
   }
 
   returnMail() {
     this.showInnerMail = false;
-    let selectId = localStorage.getItem('selectedMailId');
-    setTimeout(function() {
-      document.getElementById(`id_${selectId}`).classList.add('li-selected');
-    }, 0);
+    document.getElementById('body-outer').style.height = 'inherit';
+    this.ngOnInit();
   }
 }

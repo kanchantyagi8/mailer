@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, DoCheck, Output, EventEmitter, AfterContentInit } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
 
 @Component({
@@ -6,11 +6,14 @@ import { GlobalService } from '../../services/global.service';
   templateUrl: './left-pannel.component.html',
   styleUrls: ['./left-pannel.component.scss']
 })
-export class LeftPannelComponent implements OnInit, DoCheck {
+export class LeftPannelComponent implements OnInit, DoCheck, AfterContentInit {
   @Output() navigateToPage: EventEmitter<any> = new EventEmitter<any>();
 
   showComposeMail: boolean = false;
-  unreadMails: number = 0; 
+  unreadMails: number = 0;
+  draftMails: number = 0;
+  trashMails: number = 0;
+  sendMails: number = 0;
   folderItems = [
     {id: 'folder', value: 'Folders', items: [
       {id: 'inbox', value: 'Inbox', classList: 'fas fa-inbox'},
@@ -43,8 +46,26 @@ export class LeftPannelComponent implements OnInit, DoCheck {
   ngOnInit(): void {
   }
 
+  gettingData() {
+    let x = JSON.parse(localStorage.getItem('emailContainer'));
+    for(let element of x) {
+      if(element.emailId === sessionStorage.getItem('username')) {
+        this.draftMails = element.draftMails.length;
+        this.trashMails = element.deleteMails.length;
+        this.sendMails = element.sendMails.length;
+        break;
+      }
+    }
+  }
+
+  ngAfterContentInit() {
+    this.unreadMails = this.globalService.getUnreadMails();
+    this.gettingData();
+  }
+
   ngDoCheck() {
-    this.unreadMails = parseInt(localStorage.getItem('unreadmails'));
+    this.unreadMails = this.globalService.getUnreadMails();
+    this.gettingData();
   }
 
   openComposeMail() {

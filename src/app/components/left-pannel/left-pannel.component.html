@@ -15,6 +15,15 @@
                         <span class="notification" *ngIf="items.id === 'inbox'">
                             {{unreadMails}}
                         </span>
+                        <span class="notification" *ngIf="items.id === 'send'">
+                            {{sendMails}}
+                        </span>
+                        <span class="notification" *ngIf="items.id === 'draft'">
+                            {{draftMails}}
+                        </span>
+                        <span class="notification" *ngIf="items.id === 'trash'">
+                            {{trashMails}}
+                        </span>
                     </li>
                 </ul>
             </li>

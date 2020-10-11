@@ -4,24 +4,27 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GlobalService {
-  totalData: any = [];
+  totalData: any;
   navLink: string;
+  index: number;
+  unreadmails: number;
 
   constructor() { }
 
   setData(data: any) {
-    if(data !== null) {
-      let x = JSON.parse(localStorage.getItem('sendMails'));
-      x.push(data);
-      this.totalData.push(data);
-      localStorage.setItem('sendMails', JSON.stringify(x));
-    } else {
-      this.totalData.length = 0;
-    }
+    this.totalData = data;
   }
 
   setNavigation(nav: any) {
     this.navLink = nav;
+  }
+
+  setIndex(e) {
+    this.index = e;
+  }
+
+  setUnreadMails(e) {
+    this.unreadmails = e;
   }
 
   getData() {
@@ -31,4 +34,13 @@ export class GlobalService {
   getNavigation() {
     return this.navLink;
   }
+
+  getIndex() {
+    return this.index;
+  }
+
+  getUnreadMails() {
+    return this.unreadmails;
+  }
+
 }

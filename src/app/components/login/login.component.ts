@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit, AfterContentInit {
   loginForm: FormGroup;
   emailContainer: any = [];
-  count: number = 0;
 
   constructor(
     private fb: FormBuilder, 
@@ -36,26 +35,43 @@ export class LoginComponent implements OnInit, AfterContentInit {
   }
 
   loginApp() {
-    let unreadmails = 0;
+    let nameIsWrong = false;
     sessionStorage.setItem('username', this.loginForm.controls['username'].value);
     sessionStorage.setItem('name', this.loginForm.controls['name'].value);
+    let data = {
+      name: sessionStorage.getItem('name'),
+      emailId: sessionStorage.getItem('username'),
+      inputMails: [],
+      deleteMails: [],
+      sendMails: [],
+      draftMails: []
+    };
     if(!localStorage.getItem('emailContainer')) {
+      this.emailContainer.push(data);
       localStorage.setItem('emailContainer', JSON.stringify(this.emailContainer));
+      localStorage.setItem('id', JSON.stringify(0));
     } else {
       let x = JSON.parse(localStorage.getItem('emailContainer'));
+      let isUserAvailable = false;
       x.forEach((element) => {
-        if(element.readMail) {
-          element.readMail = false;
-        }
-        if(element.ccEmail === sessionStorage.getItem('username') || element.toEmail === sessionStorage.getItem('username')) {
-          unreadmails++;
+        if(element.emailId === sessionStorage.getItem('username')) {
+          isUserAvailable = true;
+          if(isUserAvailable && (element.name.length === 0)) {
+            element.name = sessionStorage.getItem('name');
+          } else if(element.name.length > 0 && element.name !== sessionStorage.getItem('name')) {
+            nameIsWrong = true;
+          }
         }
       });
+      if(!isUserAvailable && !nameIsWrong) {
+        x.push(data);
+      }
       localStorage.setItem('emailContainer', JSON.stringify(x));
-      localStorage.setItem('unreadmails', JSON.stringify(unreadmails));
     }
-    localStorage.setItem('count', JSON.stringify(this.count));
-    localStorage.setItem('sendMails', JSON.stringify([]));
-    this.router.navigate(['dashboard']);
+    if(nameIsWrong) {
+      alert("Name is wrong");
+    } else {
+      this.router.navigate(['dashboard']);
+    }
   }
 }

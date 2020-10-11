@@ -1,29 +1,31 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterContentInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, DoCheck {
+export class HeaderComponent implements OnInit, DoCheck, AfterContentInit {
   unreadMails: number = 0;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private globalService: GlobalService) { }
 
   ngOnInit(): void {
   }
 
+  ngAfterContentInit() {
+    this.unreadMails = this.globalService.getUnreadMails();
+  }
+
   ngDoCheck() {
-    this.unreadMails = parseInt(localStorage.getItem('unreadmails'));
+    this.unreadMails = this.globalService.getUnreadMails();
   }
 
   logout() {
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('name');
-    localStorage.setItem('count', JSON.stringify(0));
-    localStorage.setItem('sendMails', JSON.stringify([]));
-    localStorage.setItem('unreadmails', JSON.stringify(0));
     this.router.navigate(['']);
   }
 }

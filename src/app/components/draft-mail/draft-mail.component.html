@@ -1,14 +1,14 @@
 <div class="send-mail-container">
-    <h2>Send Mail({{sendMailList.length}})</h2>
+    <h2>Draft Mail({{draftMailList.length}})</h2>
     <ul class="body-ul">
-        <li *ngFor="let mail of sendMailList; let i = index">
+        <li *ngFor="let mail of draftMailList; let i = index">
             <div class="mail-showcase">
                 <div class="checkbox-container">
                     <input type="checkbox"/>
                 </div>
                 <div class="mail-info">
                     <div class="name-container">
-                        {{mail.toEmail}}
+                        {{mail.fromName}}
                     </div>
                     <div class="subject-container">
                         {{mail.subject}}

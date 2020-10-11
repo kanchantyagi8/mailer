@@ -10,6 +10,10 @@
     margin-top: 20px;
     border-radius: 2px;
 
+    .body-outer-section {
+        height: inherit;
+    }
+
     h2 {
         font-size: 24px;
         font-weight: 300;
@@ -18,7 +22,7 @@
 
     .body-inner-section {
         overflow: auto;
-        height: 81%;
+        height: 80%;
     }
 
     .right-header {
@@ -27,6 +31,10 @@
         .inbox-menu-items {
             display: flex;
             flex-direction: row;
+            .search-container {
+                margin-left: auto;
+                margin-top: -43px;
+            }
             .refresh, .delete {
                 border: 1px solid $color-input-border;
                 padding: 5px 10px;

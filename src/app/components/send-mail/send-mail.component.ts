@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-send-mail',
@@ -9,9 +10,9 @@ export class SendMailComponent implements OnInit {
   sendMailList: any;
   showInnerMail: boolean = false;
 
-  constructor() { }
+  constructor(private globalService: GlobalService) { }
 
   ngOnInit(): void {
-    this.sendMailList = JSON.parse(localStorage.getItem('sendMails'));
+    this.sendMailList = this.globalService.getData().sendMails;
   }
 }

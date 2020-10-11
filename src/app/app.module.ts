@@ -18,6 +18,10 @@ import { BodySectionComponent } from './components/body-section/body-section.com
 import { ComposeMailComponent } from './components/compose-mail/compose-mail.component';
 import { MailComponent } from './components/mail/mail.component';
 import { SendMailComponent } from './components/send-mail/send-mail.component';
+import { TrashMailComponent } from './components/trash-mail/trash-mail.component';
+import { DraftMailComponent } from './components/draft-mail/draft-mail.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { SearchContainerComponent } from './components/search-container/search-container.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { SendMailComponent } from './components/send-mail/send-mail.component';
     BodySectionComponent,
     ComposeMailComponent,
     MailComponent,
-    SendMailComponent
+    SendMailComponent,
+    TrashMailComponent,
+    DraftMailComponent,
+    SearchPipe,
+    SearchContainerComponent
   ],
   imports: [
     BrowserModule,
